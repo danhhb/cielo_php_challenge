@@ -11,6 +11,25 @@ class Api extends CI_Controller {
 		$this->load->helper('security');
 	}
 
+	public function action()
+	{ 
+		if ($this->input->post('data_action'))
+		{
+			$data_action = $this->input->post('data_action');
+
+			if ($data_action == "fetch")
+			{
+				$result = $this->user_model->fetch_all();
+				$data['users'] = $result->result_array();
+				$cards = $this->load->view('users/cards', $data, TRUE);
+
+				echo "$cards";
+			}
+		}
+		
+		echo "";
+	}
+
 	public function insert()
 	{
 
